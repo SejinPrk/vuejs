@@ -4,6 +4,7 @@
       <div class="white-bg">
         <h4>상세페이지</h4>
         <p>상세페이지 내용</p>
+        <button @click="modalStatus = false">닫기</button>
       </div>
     </div>
 
@@ -11,45 +12,31 @@
       <a v-for="a in menus" :key="a">{{ a }}</a>
     </div>
     
-    <div>
-      <img src="./assets/room0.jpg" class="room-img">
-      <h4 @click="modalStatus = true">{{ products[0]}}</h4>
-      <p>50만원</p>
-      <button @click="increase(0)">허위매물신고</button>
-      <span>신고수 : {{reportNo[0]}} </span>
+    <div v-for="(room, index) in onerooms" :key="index">
+      <img :src="room.image" class="room-img" />
+      <h4 @click="openModal(index)">{{ room.title }}</h4>
+      <p>{{ room.price }}</p>
     </div>
-    <div>
-      <img src="./assets/room1.jpg" class="room-img">
-      <h4 @click="modalStatus = true">{{ products[1]}}</h4>
-      <p>60만원</p>
-      <button @click="increase(1)">허위매물신고</button>
-      <span>신고수 : {{reportNo[1]}}</span>
-    </div>
-    <div>
-      <img src="./assets/room2.jpg" class="room-img">
-      <h4 @click="modalStatus = true">{{ products[2]}}</h4>
-      <p>70만원</p>
-      <button @click="increase(2)">허위매물신고</button>
-      <span>신고수 : {{reportNo[2]}} </span>
-    </div>
+
   </div>
 </template>
 
 <script>
 
+import data from './assets/oneroom.js';
 
 export default {
   name: 'App',
   data() {
     return {
+      onerooms: data,
       modalStatus : false,
       reportNo : [0, 0, 0],
       menus : ['Home', 'Shop', 'About'],
-      products: ['역삼동 원룸', '천호동원룸', '마포구원룸'],
+      products : ['1', '2', '3'],
     }
   },
   methods : {
-    // 함수 만드는 공간 
     increase(index) {
       this.reportNo[index] += 1; 
     },
