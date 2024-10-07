@@ -1,21 +1,30 @@
 <template>
+
+<div v-if="1 == 23">
+  안녕하세요
+</div>
+<div v-else-if="1 == 3">
+  안녕하세요2
+</div>
+
   <div>
     <div class="black-bg" v-if="modalStatus == true">
       <div class="white-bg">
-        <h4>상세페이지</h4>
-        <p>상세페이지 내용</p>
+        <h4>{{ onerooms[clicked].title }}</h4>
+        <p>{{상세페이지내용}}</p>
         <button @click="modalStatus = false">닫기</button>
       </div>
     </div>
+
 
     <div class="menu">
       <a v-for="a in menus" :key="a">{{ a }}</a>
     </div>
     
     <div v-for="(room, index) in onerooms" :key="index">
-      <img :src="room.image" class="room-img" />
-      <h4 @click="openModal(index)">{{ room.title }}</h4>
-      <p>{{ room.price }}</p>
+      <img :src="room.image" class="room-img">
+      <h4 @click="modalStatus = true; clicked = index">{{ room.title }}</h4>
+      <p>{{ room.price }}원</p>
     </div>
 
   </div>
@@ -29,6 +38,7 @@ export default {
   name: 'App',
   data() {
     return {
+      clicked: 0,
       onerooms: data,
       modalStatus : false,
       reportNo : [0, 0, 0],
