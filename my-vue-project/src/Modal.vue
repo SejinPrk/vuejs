@@ -5,14 +5,20 @@
             <h4>{{ onerooms[clicked].title }}</h4>
             <p>{{ onerooms[clicked].content }}</p>
             <p>{{ onerooms[clicked].price }}원</p>
-            <button @click="modalStatus = false">닫기</button>
+            <!-- <button @click="modalStatus = false">닫기</button> -->
         </div>
     </div>
 </template>
 
 <script>
+
 export default {
     name : 'ModalInfo',
+    props : {
+        onerooms : Array,
+        clicked: Number,
+        ModalStatus: Boolean,
+    }
 }
 </script>
 

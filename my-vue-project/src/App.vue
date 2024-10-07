@@ -1,19 +1,16 @@
 <template>
 
   <div>
-  <Modal/>
+  <Modal :onerooms="onerooms" :clicked="clicked" :modalStatus="modalStatus" />
 
     <div class="menu">
       <a v-for="a in menus" :key="a">{{ a }}</a>
     </div>
     
-    <Discount/>
+    <Discount :name="object.name" :age="object.age" />
 
-    <div v-for="(room, index) in onerooms" :key="index">
-      <img :src="room.image" class="room-img">
-      <h4 @click="modalStatus = true; clicked = index">{{ room.title }}</h4>
-      <p>{{ room.price }}원</p>
-    </div>
+    <Card :room="onerooms[index]" v-for="(a, index) in onerooms" :key="a"/>
+
 
   </div>
 </template>
@@ -21,6 +18,7 @@
 <script>
 
 import data from './assets/oneroom.js';
+import Card from './Card.vue';
 import Discount from './Discount.vue';
 import Modal from './Modal.vue';
 
@@ -28,12 +26,12 @@ export default {
   name: 'App',
   data() {
     return {
+      object : { name : 'kim', age : 20},
       clicked: 0,
       onerooms: data,
       modalStatus : false,
       reportNo : [0, 0, 0],
       menus : ['Home', 'Shop', 'About'],
-      products : ['1', '2', '3'],
     }
   },
   methods : {
@@ -46,9 +44,13 @@ export default {
   components: {
     Discount : Discount,
     Modal : Modal,
+    Card : Card,
   }
 }
 </script>
+
+
+
 
 <style>
 body {
