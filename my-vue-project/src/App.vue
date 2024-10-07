@@ -1,26 +1,14 @@
 <template>
 
-<div v-if="1 == 23">
-  안녕하세요
-</div>
-<div v-else-if="1 == 3">
-  안녕하세요2
-</div>
-
   <div>
-    <div class="black-bg" v-if="modalStatus == true">
-      <div class="white-bg">
-        <h4>{{ onerooms[clicked].title }}</h4>
-        <p>{{상세페이지내용}}</p>
-        <button @click="modalStatus = false">닫기</button>
-      </div>
-    </div>
-
+  <Modal/>
 
     <div class="menu">
       <a v-for="a in menus" :key="a">{{ a }}</a>
     </div>
     
+    <Discount/>
+
     <div v-for="(room, index) in onerooms" :key="index">
       <img :src="room.image" class="room-img">
       <h4 @click="modalStatus = true; clicked = index">{{ room.title }}</h4>
@@ -33,6 +21,8 @@
 <script>
 
 import data from './assets/oneroom.js';
+import Discount from './Discount.vue';
+import Modal from './Modal.vue';
 
 export default {
   name: 'App',
@@ -54,6 +44,8 @@ export default {
   },
 
   components: {
+    Discount : Discount,
+    Modal : Modal,
   }
 }
 </script>
@@ -64,6 +56,12 @@ body {
 }
 div {
   box-sizing: border-box;
+}
+.discount {
+  background: #eee;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
 }
 .black-bg {
   width: 100%; height: 100%;
