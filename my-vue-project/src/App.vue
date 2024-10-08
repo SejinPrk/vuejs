@@ -15,6 +15,11 @@
     
     <Discount :name="object.name" :age="object.age" />
 
+    <button @click="priceSort">가격 순 정렬</button>
+    <button @click="priceSortDesc">가격 역순 정렬</button>
+    <button @click="sortBack">되돌리기</button>
+
+
     <Card 
       @openModal="modalStatus = true; clicked=index;" 
 
@@ -36,9 +41,10 @@ export default {
   name: 'App',
   data() {
     return {
+      oneroomsOriginal: [...data], // 보존할 원본 데이터: array/object 데이터의 사본을 만든다
       object : { name : 'kim', age : 20},
       clicked: 0,
-      onerooms: data,
+      onerooms: data, // 조작할 데이터
       modalStatus : false,
       reportNo : [0, 0, 0],
       menus : ['Home', 'Shop', 'About'],
@@ -48,7 +54,23 @@ export default {
     increase(index) {
       this.reportNo[index] += 1; 
     },
-    
+    priceSort() {
+      this.onerooms.sort(function(a, b) {
+        // return a - b; // sort 함수는 문자열 정렬 -> 숫자를 정렬하려면 안에 function 필요: a - b < 0이면 a을 왼쪽으로 
+        // 그러나 원룸들은 Object이기 때문에 object끼리의 뺼셈식이 안먹힘 -> price를 비교해야 한다
+        return a.price - b.price;
+      });
+    },
+    priceSortDesc() {
+      this.onerooms.sort(function(a, b) {
+        return b.price - a.price; // 가격 역순 정렬
+      });
+    },
+    sortBack() { 
+      // sort 함수는 원본을 변형시켜버림. map()이나 filter()함수를 사용해야 원본 데이터 유지 가능
+      // this.onerooms = this.oneroomsOriginal; // 등호는 값을 공유한다는 의미가 되어 어느 순간 되돌리기 버튼이 작동하지 않음
+      this.onerooms = [...this.oneroomsOriginal]; // 별개의 사본을 만들어야 함
+    },
   },
 
   components: {
