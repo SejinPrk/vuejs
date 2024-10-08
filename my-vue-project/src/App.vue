@@ -9,7 +9,7 @@
     
     <Discount :name="object.name" :age="object.age" />
 
-    <Card :room="onerooms[index]" v-for="(a, index) in onerooms" :key="a"/>
+    <Card @openModal="modalStatus = true; clicked=index" :room="onerooms[index]" v-for="(a, index) in onerooms" :key="a"/>
 
 
   </div>

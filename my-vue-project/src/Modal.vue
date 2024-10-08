@@ -17,7 +17,7 @@ export default {
     props : {
         onerooms : Array,
         clicked: Number,
-        ModalStatus: Boolean,
+        modalStatus: Boolean,
     }
 }
 </script>
