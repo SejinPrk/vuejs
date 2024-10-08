@@ -1,6 +1,5 @@
-# my-vue-project
-real estate sample project
-부동산 웹사이트
+# blog-project
+
 ## Project setup
 ```
 npm install
