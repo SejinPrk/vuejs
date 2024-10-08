@@ -13,8 +13,8 @@
       <a v-for="a in menus" :key="a">{{ a }}</a>
     </div>
     
-    <Discount :name="object.name" :age="object.age" />
-
+    <Discount v-if="showDiscount == true" />
+    <p>지금 결제하면 {{ amount }}% 할인</p>
     <button @click="priceSort">가격 순 정렬</button>
     <button @click="priceSortDesc">가격 역순 정렬</button>
     <button @click="sortBack">되돌리기</button>
@@ -41,6 +41,8 @@ export default {
   name: 'App',
   data() {
     return {
+      showDiscount : true,
+      amount : 30,
       oneroomsOriginal: [...data], // 보존할 원본 데이터: array/object 데이터의 사본을 만든다
       object : { name : 'kim', age : 20},
       clicked: 0,
@@ -70,9 +72,18 @@ export default {
       // sort 함수는 원본을 변형시켜버림. map()이나 filter()함수를 사용해야 원본 데이터 유지 가능
       // this.onerooms = this.oneroomsOriginal; // 등호는 값을 공유한다는 의미가 되어 어느 순간 되돌리기 버튼이 작동하지 않음
       this.onerooms = [...this.oneroomsOriginal]; // 별개의 사본을 만들어야 함
-    },
+    },       
   },
-
+  mounted() {
+      setInterval(() => {
+        this.amount--;
+      }, 1000);
+    }, 
+  beforeUnmount() {
+      // 컴포넌트가 파괴되기 전에 타이머 정리
+      clearInterval(this.intervalId);
+  },
+  
   components: {
     Discount : Discount,
     Modal : Modal,

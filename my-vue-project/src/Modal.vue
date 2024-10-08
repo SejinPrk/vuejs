@@ -5,7 +5,7 @@
             <h4>{{ onerooms[clicked].title }}</h4>
             <p>{{ onerooms[clicked].content }}</p>
             <input v-model.number="month"> 
-            <p> {{ month }} 개월 선택함 : {{ onerooms[clicked].price + month }}원</p>
+            <p> {{ month }} 개월 선택함 : {{ onerooms[clicked].price * month }}원</p>
             <button @click="close">닫기</button>
         </div>
     </div>
@@ -41,7 +41,12 @@ export default {
         close () {
             this.$emit('closeModal')
         }
-    }
+    },
+    beforeUpdate(){
+        if (this.month == 2) {
+            alert('2개월은 너무 적음');
+        }
+    },
 }
 </script>
 
