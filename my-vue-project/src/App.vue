@@ -1,11 +1,13 @@
 <template>
   <div>
 
-    <Modal 
-      @closeModal="modalStatus = false" 
-      :onerooms="onerooms" :clicked="clicked" 
-      :modalStatus="modalStatus" 
-    />
+    <transition name="fade">
+      <Modal 
+        @closeModal="modalStatus = false" 
+        :onerooms="onerooms" :clicked="clicked" 
+        :modalStatus="modalStatus" 
+      />
+    </transition>
 
     <div class="menu">
       <a v-for="a in menus" :key="a">{{ a }}</a>
@@ -58,9 +60,27 @@ export default {
 </script>
 
 
-
-
 <style>
+.fade-enter-from {
+  transform: translateY(-1000px);
+}
+.fade-enter-active {
+  transition: all 1s;
+}
+.fade-enter-to {
+  transform: translateY(0px);
+}
+
+.fade-leave-from {
+  opacity: 1;
+}
+.fade-leave-active {
+  transition: all 1s;
+}
+.fade-leave-to {
+  opacity: 0;
+}
+
 body {
   margin: 0;
 }
