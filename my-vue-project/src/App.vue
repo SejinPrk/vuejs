@@ -1,7 +1,7 @@
 <template>
 
   <div>
-  <Modal :onerooms="onerooms" :clicked="clicked" :modalStatus="modalStatus" />
+  <Modal @closeModal="modalStatus = false" :onerooms="onerooms" :clicked="clicked" :modalStatus="modalStatus" />
 
     <div class="menu">
       <a v-for="a in menus" :key="a">{{ a }}</a>
@@ -9,7 +9,12 @@
     
     <Discount :name="object.name" :age="object.age" />
 
-    <Card @openModal="modalStatus = true; clicked=index" :room="onerooms[index]" v-for="(a, index) in onerooms" :key="a"/>
+    <Card 
+      @openModal="modalStatus = true; clicked=index;" 
+
+      :room="onerooms[index]" 
+      v-for="(a, index) in onerooms" :key="a" 
+    />
 
 
   </div>

@@ -5,7 +5,7 @@
             <h4>{{ onerooms[clicked].title }}</h4>
             <p>{{ onerooms[clicked].content }}</p>
             <p>{{ onerooms[clicked].price }}원</p>
-            <!-- <button @click="modalStatus = false">닫기</button> -->
+            <button @click="close">닫기</button>
         </div>
     </div>
 </template>
@@ -18,6 +18,11 @@ export default {
         onerooms : Array,
         clicked: Number,
         modalStatus: Boolean,
+    },
+    methods : {
+        close () {
+            this.$emit('closeModal')
+        }
     }
 }
 </script>
