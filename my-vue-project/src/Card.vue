@@ -1,7 +1,7 @@
 <template>
     <div>
         <img :src="room.image" class="room-img">
-        <h4 @click="$emit('openModal', room.id)">{{ room.title }}</h4>
+        <h4 @click="send">{{ room.title }}</h4>
         <p>{{ room.price }}원</p>
     </div>
 </template>
@@ -13,10 +13,15 @@ export default {
     props : {
         room : Object,
         clicked: Number,
-        modalStatus: Boolean  // modalStatus를 props로 받음
+        modalStatus: Boolean,
+    },
+    methods : {
+        send () {
+            this.$emit('openModal', this.room.id) // 함수 내에서는 무조건 this 앞에 붙이기
+        }
     }
 }
 </script>
 
-<style>
+<style> 
 </style>
