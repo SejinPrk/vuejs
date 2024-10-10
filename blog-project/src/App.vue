@@ -23,13 +23,29 @@
     </div>
   </div>
 </nav>
+
+<router-link to="/">홈페이지</router-link>
+<router-link to="/list">리스트 페이지</router-link>
+
+<router-view :contents="contents"></router-view>
+
+<!-- <BlogList :contents="contents"/> -->
+
 </template>
 
 <script>
+// import BlogList from './components/BlogList.vue'
+import blog from './assets/blog.js'
 
 export default {
   name: 'App',
+  data() {
+    return {
+      contents : blog
+    }
+  },
   components: {
+    // BlogList
   }
 }
 </script>
