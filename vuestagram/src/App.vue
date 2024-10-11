@@ -10,7 +10,8 @@
   </div>
 
   <ContainerBox  :postings="postings"/>
-
+  <button @click="showMore">더보기</button>
+  
   <div class="footer">
     <ul class="footer-button-plus">
       <input type="file" id="file" class="inputfile" />
@@ -22,18 +23,31 @@
 <script>
 import postdata from './assets/postdata';
 import ContainerBox from './components/ContainerBox.vue';
+import axios from 'axios';
+
+axios.get();
 
 export default {
   name: 'App',
   data() {
     return {
       postings : postdata,
+      moreCount : 0,
     }
   },
   components: {
       ContainerBox,
-  }
-}
+  },
+  methods : {
+    showMore() {
+      axios.get(`https://codingapple1.github.io/vue/more${this.moreCount}.json`)
+      .then(result => {
+        this.postings.push(result.data);
+        this.moreCount++;
+      });
+    },
+  },
+};
 </script>
 
 <style>
