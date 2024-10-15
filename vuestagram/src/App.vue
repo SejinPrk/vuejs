@@ -4,13 +4,14 @@
       <li>Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li v-if="step == 1" @click="step++">Next</li>
+      <li v-if="step == 2" @click="publish">발행</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <ContainerBox :postings="postings" :step="step"/>
-  <button @click="showMore">더보기</button>
+  <ContainerBox :write="mypost = $event" :image="image" :postings="postings" :step="step"/>
+  <!-- <button @click="showMore">더보기</button> -->
   
   <div class="footer">
     <ul class="footer-button-plus">
@@ -34,15 +35,29 @@ export default {
     return {
       step: 0,
       postings : postdata,
-      moreCount : 0,
+      image : '',
     }
   },
   components: {
       ContainerBox,
   },
   methods : {
+    publish() {
+      let mypost = {
+        name: "Kim Hyun",
+        userImage: "https://picsum.photos/100?random=1",
+        postImage: this.image,
+        likes: 36,
+        date: "May 15",
+        liked: false,
+        content: this.mypost,
+        filter: "perpetua"
+      };
+      this.postings.unshift(mypost);
+      this.step = 0; // 메인 페이지로 돌아가기
+    },
     showMore() {
-      axios.get(`https://codingapple1.github.io/vue/more${this.moreCount}.json`)
+      axios.get(`https://codingapple1.github.io/vue/more0.json`)
       .then(result => {
         this.postings.push(result.data);
         this.moreCount++;
@@ -50,12 +65,11 @@ export default {
     },
     upload(e) {
       let file = e.target.files;
-      console.log(file[0].type);
       let url = URL.createObjectURL(file[0]);
       console.log(url);
+      this.image = url;
       this.step++;
     }
-
   }, 
 };
 </script>
