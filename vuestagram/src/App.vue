@@ -16,6 +16,9 @@
   <button @click="$store.commit('changeName')">button</button>
   <button @click="$store.commit('changeAge', 10)">button</button> -->
   
+  <p>{{ $store.state.more }}</p>
+  <button @click="$store.dispatch('getData')">더보기 버튼</button>
+
   <ContainerBox @write="mypost = $event" @filterSelected="selectedFilter = $event" :image="image" :postings="postings" :step="step"/>
   
   <div class="footer">
