@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="header">  
     <ul class="header-button-left">
       <li>Cancel</li>
     </ul>
@@ -8,10 +8,13 @@
       <li v-if="step == 2" @click="publish">발행</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
-  </div>
 
-  <ContainerBox :write="mypost = $event" :image="image" :postings="postings" :step="step"/>
-  <!-- <button @click="showMore">더보기</button> -->
+  </div>
+<!-- 
+  <h4>안녕 {{ $store.state.name }}</h4>
+  <button @click="$store.state.name='박'">버튼</button> -->
+
+  <ContainerBox @write="mypost = $event" :image="image" :postings="postings" :step="step"/>
   
   <div class="footer">
     <ul class="footer-button-plus">
@@ -30,13 +33,21 @@ import axios from 'axios';
 axios.get();
 
 export default {
+
   name: 'App',
   data() {
     return {
       step: 0,
       postings : postdata,
       image : '',
+      mypost : '',
+      selectedFilter : '',
     }
+  },
+  mounted() {
+    this.emitter.on('boxClicked', (a)=> {
+      this.selectedFilter = a; 
+    })
   },
   components: {
       ContainerBox,

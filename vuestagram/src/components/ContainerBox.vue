@@ -6,21 +6,21 @@
     </div>
   </div>
 
+
   <!-- 필터선택페이지 -->
-  <div  v-if="step == 1">
-    <div class="upload-image" :style="`background-image:url(${image})`"></div>
+  <div v-if="step == 1">
+    <div :class="selectedFilter" class="upload-image" :style="`background-image:url(${image})`"></div>
     <div class="filters">
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
+      <FilterBox filter="filter" :image="image" v-for="filter in filters" :key="filter">
+        <template>{{ filter }}</template>
+      </FilterBox>
     </div>
   </div>
 
+
   <!-- 글작성페이지 -->
   <div v-if="step == 2">
-    <div class="upload-image" :style="`background-image:url(${image})`"></div>
+    <div :class="selectedFilter" class="upload-image" :style="`background-image:url(${image})`"></div>
     <div class="write">
       <textarea @input="$emit('write', $event.target.value)" class="write-box">write!</textarea>
     </div>
@@ -30,10 +30,26 @@
 
 <script>
 import PostIG from './PostIG.vue';
+import FilterBox from './FilterBox.vue';
 
 export default {
+  data() {
+    return {
+      filters : [ "aden", "_1977", "brannan", "brooklyn", "clarendon", "earlybird", "gingham", "hudson", 
+        "inkwell", "kelvin", "lark", "lofi", "maven", "mayfair", "moon", "nashville", "perpetua", 
+        "reyes", "rise", "slumber", "stinson", "toaster", "valencia", "walden", "willow", "xpro2"
+      ],
+      selectedFilter : '',
+    }
+  },
+  mounted() {
+    this.emitter.on('boxClicked', (a)=> {
+      this.selectedFilter = a; 
+    })
+  },
   components: {
       PostIG,
+      FilterBox,
   },
   props : {
     postings: Array,

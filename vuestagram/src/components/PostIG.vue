@@ -4,13 +4,13 @@
       <div class="profile"></div>
       <span class="profile-name">{{ postings.name }}</span>
     </div>
-    <div class="post-body" :style="{ backgroundImage : `url(${postings.postImage})` }"></div>
+    <div :class="postings.filter" class="post-body" :style="{ backgroundImage : `url(${postings.postImage})` }"></div>
     <div class="post-content">
-      <p>{{  postings.likes }} likes</p>
-      <p><strong>{{ postings.name}}</strong> {{ postings.content }}</p>
+      <p>{{ postings.likes }} likes</p>
+      <p><strong>{{ postings.name }}</strong> {{ postings.content }}</p>
       <p class="date">May 15</p>
     </div>
-</div> 
+  </div>
 </template>
 
 <script>
