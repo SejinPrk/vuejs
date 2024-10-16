@@ -10,11 +10,11 @@
     <img src="./assets/logo.png" class="logo" />
 
   </div>
-<!-- 
-  <h4>안녕 {{ $store.state.name }}</h4>
-  <button @click="$store.state.name='박'">버튼</button> -->
 
-  <ContainerBox @write="mypost = $event" :image="image" :postings="postings" :step="step"/>
+  <h4>안녕 {{ $store.state.name }}</h4>
+  <button @click="$store.commit('changeName')">button</button>
+
+  <ContainerBox @write="mypost = $event" @filterSelected="selectedFilter = $event" :image="image" :postings="postings" :step="step"/>
   
   <div class="footer">
     <ul class="footer-button-plus">

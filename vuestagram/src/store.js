@@ -1,11 +1,17 @@
 import { createStore } from 'vuex'
 
 const store = createStore({
-  state(){
+  state() {
     return {
-      name : 'kim' // state 보관
+      name : 'kim', // state 보관
+      age : 20
     }
   },
+  mutations :{
+    changeName (state) {
+      state.name = 'park'
+    }
+  }
 })
 
 export default store

@@ -11,7 +11,7 @@
   <div v-if="step == 1">
     <div :class="selectedFilter" class="upload-image" :style="`background-image:url(${image})`"></div>
     <div class="filters">
-      <FilterBox filter="filter" :image="image" v-for="filter in filters" :key="filter">
+      <FilterBox :filter="filter" :image="image" v-for="filter in filters" :key="filter">
         <template>{{ filter }}</template>
       </FilterBox>
     </div>
