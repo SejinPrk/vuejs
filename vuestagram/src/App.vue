@@ -12,7 +12,9 @@
   </div>
 
   <h4>안녕 {{ $store.state.name }}</h4>
+  <p>{{  $store.state.age }}</p>
   <button @click="$store.commit('changeName')">button</button>
+  <button @click="$store.commit('changeAge')">button</button>
 
   <ContainerBox @write="mypost = $event" @filterSelected="selectedFilter = $event" :image="image" :postings="postings" :step="step"/>
   

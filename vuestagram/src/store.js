@@ -10,6 +10,9 @@ const store = createStore({
   mutations :{
     changeName (state) {
       state.name = 'park'
+    },
+    changeAge (state) {
+      state.age ++;
     }
   }
 })
