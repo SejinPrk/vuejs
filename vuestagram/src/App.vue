@@ -10,18 +10,10 @@
     <img src="./assets/logo.png" class="logo" />
 
   </div>
-
-  <!-- <h4>안녕 {{ $store.state.name }}</h4>
-  <p>{{  $store.state.age }}</p>
-  <button @click="$store.commit('changeName')">button</button>
-  <button @click="$store.commit('changeAge', 10)">button</button> -->
-  
   <p>{{ $store.state.more }}</p>
   <button @click="$store.dispatch('getData')">더보기 버튼</button>
 
   <ContainerBox @write="mypost = $event" @filterSelected="selectedFilter = $event" :image="image" :postings="postings" :step="step"/>
-  <p>{{ now2 }}   {{  cnt }}</p>
-  <button @click="cnt++">button</button>
   <div class="footer">
     <ul class="footer-button-plus">
       <input @change="upload" type="file" id="file" class="inputfile" />
@@ -35,8 +27,7 @@
 import postdata from './assets/postdata';
 import ContainerBox from './components/ContainerBox.vue';
 import axios from 'axios';
-
-axios.get();
+import { mapMutations, mapState } from 'vuex';
 
 export default {
 
@@ -60,14 +51,11 @@ export default {
       ContainerBox,
   },
   computed: {
-    now2() {
-      return new Date()
-    },
+    ...mapState(['name', 'age', 'likes']),
   },
   methods : {
-    now() {
-      return new Date()
-    },
+    ...mapMutations(['setMore', 'likes']),
+
     publish() {
       let mypost = {
         name: "Kim Hyun",
