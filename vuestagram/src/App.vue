@@ -10,8 +10,8 @@
     <img src="./assets/logo.png" class="logo" />
 
   </div>
-  <p>{{ $store.state.more }}</p>
-  <button @click="$store.dispatch('getData')">더보기 버튼</button>
+  <!-- <p>{{ $store.state.more }}</p> -->
+  <!-- <button @click="$store.dispatch('getData')">더보기 버튼</button> -->
 
   <ContainerBox @write="mypost = $event" @filterSelected="selectedFilter = $event" :image="image" :postings="postings" :step="step"/>
   <div class="footer">
@@ -34,7 +34,7 @@ export default {
   name: 'App',
   data() {
     return {
-      step: 0,
+      step: 3,
       postings : postdata,
       image : '',
       mypost : '',

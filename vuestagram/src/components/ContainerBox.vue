@@ -26,11 +26,17 @@
     </div>
   </div>
 
+  <div v-if="step == 3">
+    <MyPage />
+
+  </div>
+
 </template>
 
 <script>
 import PostIG from './PostIG.vue';
 import FilterBox from './FilterBox.vue';
+import MyPage from './MyPage.vue';
 
 export default {
   data() {
@@ -50,6 +56,7 @@ export default {
   components: {
       PostIG,
       FilterBox,
+      MyPage,
   },
   props : {
     postings: Array,
