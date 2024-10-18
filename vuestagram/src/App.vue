@@ -20,7 +20,8 @@
   <button @click="$store.dispatch('getData')">더보기 버튼</button>
 
   <ContainerBox @write="mypost = $event" @filterSelected="selectedFilter = $event" :image="image" :postings="postings" :step="step"/>
-  
+  <p>{{ now2 }}   {{  cnt }}</p>
+  <button @click="cnt++">button</button>
   <div class="footer">
     <ul class="footer-button-plus">
       <input @change="upload" type="file" id="file" class="inputfile" />
@@ -47,6 +48,7 @@ export default {
       image : '',
       mypost : '',
       selectedFilter : '',
+      cnt: 0,
     }
   },
   mounted() {
@@ -57,7 +59,15 @@ export default {
   components: {
       ContainerBox,
   },
+  computed: {
+    now2() {
+      return new Date()
+    },
+  },
   methods : {
+    now() {
+      return new Date()
+    },
     publish() {
       let mypost = {
         name: "Kim Hyun",
